@@ -73,6 +73,7 @@ $table = array(
 		array_values($table),$string);
 		return $output;
 }
+
 function className2fileName($name){
 	$fromSimple = array('_A','_B','_C','_D','_E','_F','_G','_H',
 '_I','_J','_K','_L','_M','_N','_O','_P','_Q','_R','_S','_T','_U','_V','_W','_X','_Y','_Z');
@@ -90,11 +91,11 @@ return $fileName;
 }
 
 function _strtolower($string){
-
 $small = array('а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ъ','ь','э','ю','я');
 $large = array('А','Б','В','Г','Д','Е','Ё','Ж','З','И','Й','К','Л','М','Н','О','П','Р','С','Т','У','Ф','Х','Ц','Ч','Ш','Щ','Ъ','Ь','Э','Ю','Я');
 return str_replace($large, $small, $string);
 }
+
 function errorPath($text){
 $controllerClass = 'Controller_Pages';
 $refl = new ReflectionClass($controllerClass);
@@ -103,9 +104,12 @@ $action = $refl->getMethod('error');
 $action->invokeArgs($controller, array($text));
 exit();
 }
+
 function dispatch($route){
-if (empty($route) ){
-errorPath('Страница с таким адресом не существует. <br/> <br/>Код ошибки 4343 - Enter false route.');
+
+if(empty($route)){
+	errorPath('Страница с таким адресом не существует. <br/> <br/>Код ошибки 4343 - Enter false route.');
+}
 $controllerClass = 'Controller_'.$route['controller']; 
 if(class_exists($controllerClass))
 $refl = new Reflectionclass($controllerClass);
@@ -127,16 +131,16 @@ $controller = $refl->newInstance();
 $action = $refl->getMethod(def);
 
 if($action->getNumberOfRequiredParameters() > count($route['action'])+1)
-
 errorPath('Страница с таким адресом не существует. <br/> <br/>Код ошибки 4321 - Erroneous number of parameters.');
 else{
 $params = array('index', $route['action'], $route['params']);
 $action->invokeArgs($controller,$params);
-
 }
+
 errorPath('Страница с таким адресом не существует. <br /> <br /> Код ошибки 4310 - Error load controller and action.');
 }
 }
+
 function errorReporting(){
 if (Config::instance()->get('dev_mode') == 1) {
 	ini_set('display_errors', 'On');
@@ -156,5 +160,4 @@ echo "SQL Error: $message<br/><pre>";
 print_r($info);
 echo "</pre>";
 exit();
-}
 }

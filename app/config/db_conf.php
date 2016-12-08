@@ -1,10 +1,10 @@
 <?php
 $config = Dbconnect::instance();
 $config->set(array(
-	'host' =>'host_name',
-	'user' =>'user',
-	'pass' =>'password',
-	'name' =>'database_name'
+	'host' =>'localhost',
+	'user' =>'root',
+	'pass' =>'',
+	'name' =>'articles'
 	));
 $config->connect();
 unset($config);

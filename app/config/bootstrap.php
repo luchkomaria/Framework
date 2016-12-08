@@ -1,4 +1,3 @@
-
 <?php
 
 $includePath = array(LIB_PATH, APP_PATH.DS.'classes', get_include_path());

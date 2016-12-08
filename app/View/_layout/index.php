@@ -13,7 +13,8 @@
         	<h1>LUCHKO MARIA'S SITE</h1>
         </div>
         <div id="main">
-
+			<?php echo $content_for_layout;
+			echo "stuff";?>
         </div>
     </div>
     <div id="menu"><?php echo $menu;?>

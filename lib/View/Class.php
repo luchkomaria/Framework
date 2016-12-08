@@ -6,14 +6,24 @@ class View_Class{
 	private $_layout ='';
 	private $_view ='' ;
 	
-	private $_Vars = array();
-	private $_render;
+	private $_vars = array();
+	private $_render = true;
 	
-	public function render($title, $meta_k = "", $meta_d ="", $render = true){
+public function render($title, $meta_k = "", $meta_d ="", $render = true){
+	
 	if($render===false)
+	{
 		$this->_render = false;
-	if($this—>_render === false)
+	}
+		
+	/*if($this—>_render === false)
+	{
+		echo ($this—>_render === false);
+		echo $this->_render;
+		echo $render;
 		return false;
+	}*/	
+	
 	
 	$ext = $this->_conf->get('view_ext');
 	
@@ -23,14 +33,16 @@ class View_Class{
 	if (!file_exists($this—>_view))
 	{
 		$text = 'Страница с таким адресом не существует. <br /> <br /> Код ошибки 4310 - Error load controller and action.';
-	$this->_View = APP_PATH.DS.'View'.DS.'Pages'.DS.'error'.$ext;
+		$this->_View = APP_PATH.DS.'View'.DS.'Pages'.DS.'error'.$ext;
 	}
 	unset ($ext,$render);
-	extract($this->_Vars, EXTR_OVERWRITE);
+	extract($this->_vars, EXTR_OVERWRITE);
+	
 	
 	ob_start();
 	include $this->_view;
 	$content_for_layout = ob_get_clean();
+	
 	
 	$files = scandir(APP_PATH.DS.'View'.DS.'_element'.DS);
 	foreach($files as $val)
@@ -42,8 +54,9 @@ class View_Class{
 			$variable[basename($val,".php")] = ob_get_clean();
 		}
 	}
+	
 	extract($variable, EXTR_OVERWRITE, "new_");
-	if($th1s->_conf->get('qz_output')===1)
+	if($this->_conf->get('qz_output')===1)
 		ob_start ();
 	else
 		ob_start();
@@ -51,25 +64,23 @@ class View_Class{
 	
 	header('Content—length: '.ob_get_length());
 	$this->_render = false;
-	}
+}
+	
 public function __construct($layout ='',$view = '') {
 	$this->_conf = config::instance();
-	$this->_layout = !empty($layout) ? $layout :
-		$this->_conf->get('default_layout');
+	$this->_layout = !empty($layout) ? $layout : $this->_conf->get('default_layout');
 	if( !empty ($view)){
 		$this->_view = $view;
 	} else {
 		$router = Routing_Router::instance();
-		$this->_view = className2fileName($router->controller())
-		.DS.$router->action();
+		$this->_view = className2fileName($router->controller()).DS.$router->action();
 	}
-
 }
 
 public function set($var, $value = ''){
 	if(is_array($var)){
 		$keys = array_keys($var);
-		$values = array_va1ues($var);
+		$values = array_values($var);
 		$this->_vars = array_merge($this—>_vars,array_combine($keys, $values));
 	}else {
 	$this->_vars[$var] = $value;

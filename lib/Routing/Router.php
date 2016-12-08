@@ -37,13 +37,15 @@ public function getRoute($uri){
 	if(!isset($route))
 		return false;
 	
+	
 	$route = explode('/', $route);
 	$this->_controller = ucfirst(array_shift($route));
 	$this->_action = array_shift($route);	
 	$this->_params = $route;
+	
 	return array(
 		'controller' => $this->_controller,
-		'action' => $this—>_action,
+		'action' => $this->_action,
 		'params' => $this->_params
 	);
 }

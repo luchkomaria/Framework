@@ -22,6 +22,7 @@ Class Controller_Pages extends Controller_Abstract{
 	}
 
 	public function start(){
+		
 		$View = $this->loadView('index') ;
 		$data = Model_DB::queryRow("SELECT * FROM `material` WHERE title='О нас'");
 		$View->set('description', "Мы рады приветсовать Вас, на новом сайте проекта!");
