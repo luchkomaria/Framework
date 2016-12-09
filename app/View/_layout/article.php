@@ -11,7 +11,7 @@
 <body>
 <?php
 $DB = Dbconnect::instance()->getConnect();
-$user = $DB->select('SELECT * FROM `article`');
+$user = $DB->select('SELECT * FROM `articles`');
 echo ($user);
 ?>
 <div id="container">

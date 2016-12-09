@@ -62,7 +62,7 @@ public function render($title, $meta_k = "", $meta_d ="", $render = true){
 		ob_start();
 	include_once $this->_layout;
 	
-	header('Content—length: '.ob_get_length());
+	header('Content-length: '.ob_get_length());
 	$this->_render = false;
 }
 	
