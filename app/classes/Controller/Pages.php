@@ -27,7 +27,14 @@ Class Controller_Pages extends Controller_Abstract{
 		$data = Model_DB::queryRow("SELECT * FROM `material` WHERE title='О нас'");
 		$View->set('description', "Мы рады приветсовать Вас, на новом сайте проекта!");
 		$View->view('Pages/start');
-		$View->render("Главная страница Автоматизированной Системы Колледжа", $data['metaDesc'], $data['metaKey']);
+		$View->render("Luchko Maria's Main Page", $data['metaDesc'], $data['metaKey']);
+	}
+	public function article(){
+		
+		$View = $this->loadView('article') ;
+		$data = Model_DB::queryRow("SELECT * FROM `article`");
+		$View->view('Pages/article');
+		$View->render("About us", $data['metaDesc'], $data['metaKey']);
 	}
 }
 ?>

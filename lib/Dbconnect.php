@@ -23,18 +23,15 @@ class Dbconnect{
     
     public function connect (){
         
-        self::$_idConnect = DbSimple_Generic::connect("mysql://".
-        $this->_configs['user'].":".
-        $this->_configs['pass']."@".
-        $this->_configs['host']."/".
-        $this->_configs['name']);
-        self::$_idConnect->setIdentPrefix(TABLE_PREFIX);
+        $this->_idConnect = DbSimple_Generic::connect("mysql://".
+        $this->_configs['user'].":".$this->_configs['pass']."@".$this->_configs['host']."/".$this->_configs['name']);
+        $this->_idConnect->setIdentPrefix(TABLE_PREFIX);
         if(Config::instance()->get('dev_mode')==0){
-            self::$_idConnect->setErrorHandler('databaseErrorHandler');
+            $this->_idConnect->setErrorHandler('databaseErrorHandler');
         }
     }
     
     public function getConnect(){
-        return self::$_idConnect;
+        return $this->_idConnect;
     }
 }

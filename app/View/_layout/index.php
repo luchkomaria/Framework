@@ -5,7 +5,11 @@
 <title><?php echo $title?></title>
 <link href="<?php echo SERVER;?>style/style.css" rel="stylesheet" type="text/css">
 </head>
-
+<?php
+$DB = Dbconnect::instance()->getConnect();
+$user = $DB->select('SELECT * FROM `article`');
+echo ($user);
+?>
 <body>
 <div id="container">
 	<div id="content">

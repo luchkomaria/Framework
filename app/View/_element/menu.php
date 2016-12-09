@@ -1,10 +1,9 @@
-﻿<nav class="menu">
+﻿<div id="menu">
     <ul>
         <?php
-            /*foreach(Model_Menu::go() as $bah => $curr)
-            {
-                echo "<li><a href=\"$curr[link]\">$curr[title]</a></li>";
-            }*/
+		$app = Model_DB::query("SELECT * FROM `menu`");
+    foreach($app as $shit => $door)
+    {echo "<li><a href=\"$door[link]\">$door[title]</a></li>";}
         ?>
     </ul>
-</nav>
+</div>

@@ -1,1 +1,10 @@
-<h1>About us</h1>
+<?php
+    $app = Model_DB::query("SELECT * FROM `article`");
+    foreach($app as $shit => $do)
+    {
+        echo '<div class="article">';
+        echo("<h2>$do[title]</h2>");
+        echo("<p>$do[content]</p>");
+        echo '</div><br>';
+    }
+?>
